@@ -1,10 +1,8 @@
 # async-class-co
 
-This package is a fork from the project [async-class](https://github.com/danielstjules/async-class). Also, this project is implemented with Generators and [Co](https://github.com/tj/co) instead of Bluebird (present in the original async-class project).
+Clean ES6 async class wrapper in Node 4.0.0+. A solution to use promises and coroutines with classes without the overhead of babel, or the necessity to adopt unimplemented syntax and features like async/await (until v8/node supports those features).
 
-Cleaner ES6 async class methods for Node 4.0.0+. A solution to use promises
-and coroutines with classes without the overhead of babel, or the need to adopt
-unimplemented syntax and features, until v8/node supports ES7 async/await.
+This package is a fork from the project [async-class](https://github.com/danielstjules/async-class). But implemented with Generators and [Co](https://github.com/tj/co) instead of Bluebird (present in the original async-class project).
 
 [![Build Status](https://travis-ci.org/viniciusps2/async-class-co.svg?branch=master)](https://travis-ci.org/viniciusps2/async-class-co)
 
@@ -51,7 +49,7 @@ FakeDataStore.prototype.setAsync = Promise.coroutine(function*(key, value) {
 };
 ```
 
-That's where this library comes in. Using it is simple:
+That's where this library comes in. You can simply use it as the following example:
 
 ``` javascript
 'use strict';
@@ -62,7 +60,7 @@ class FakeDataStore {
     this.store = new Map();
   }
 
-  *setAsync(key, value) {
+  * setAsync(key, value) {
     this.store.set(key, value);
     return yield Promise.resolve(key);
   }
