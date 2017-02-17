@@ -1,8 +1,8 @@
 # async-class-co
 
-This is a Fork of async-class (https://github.com/danielstjules/async-class) that is implemented with Generators and Co (https://github.com/tj/co).
+This package is a fork from the project [async-class](https://github.com/danielstjules/async-class). Also, this project is implemented with Generators and [Co](https://github.com/tj/co) instead of Bluebird (present in the original async-class project).
 
-Cleaner ES6 async class methods for Node 4.0.0+. A solution to using promises
+Cleaner ES6 async class methods for Node 4.0.0+. A solution to use promises
 and coroutines with classes without the overhead of babel, or the need to adopt
 unimplemented syntax and features, until v8/node supports ES7 async/await.
 
