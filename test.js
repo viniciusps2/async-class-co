@@ -1,7 +1,6 @@
 'use strict';
 let expect  = require('chai').expect;
 let wrap    = require('./index').wrap;
-let Promise = require('bluebird');
 
 class FakeDataStore {
   constructor() {

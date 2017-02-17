@@ -1,5 +1,5 @@
 'use strict';
-let Promise = require('bluebird');
+let co = require('co');
 
 /**
  * Wraps static and instance methods whose name ends with Async, or are
@@ -38,6 +38,10 @@ function wrapStaticMethods(klass, methodNames) {
   return klass;
 }
 
+function getStaticMethods(klass) {
+  return getAllFunctions(klass);
+}
+
 /**
  * Wraps instance methods whose name ends with Async, or are GeneratorFunctions.
  * Any GeneratorFunction is wrapped with bluebird.coroutine(), and others with
@@ -54,6 +58,10 @@ function wrapInstanceMethods(klass, methodNames) {
   validateMethodNames(methodNames);
   wrapFunctions(klass.prototype, methodNames);
   return klass;
+}
+
+function getInstanceMethods(klass) {
+  return getAllFunctions(klass.prototype);
 }
 
 /**
@@ -79,11 +87,38 @@ function wrapFunctions(target, methodNames) {
     }
 
     if (target[key].constructor.name === 'GeneratorFunction') {
-      target[key] = Promise.coroutine(target[key]);
+      target[key] = co.wrap(target[key]);
     } else {
-      target[key] = Promise.method(target[key]);
+      target[key] = co.wrap(target[key]);
     }
   });
+}
+
+function getAllFunctions(target, methodNames) {
+  const functions = {};
+
+  _actualMethodKeys(target)
+  .map(function(key) {
+    let constructor = target[key].constructor.name;
+
+    const isAsyncFunction = key.endsWith('Async') || constructor === 'GeneratorFunction'
+
+    if (methodNames) {
+      if (methodNames.indexOf(key) === -1) return;
+    } else if (key === 'constructor') {
+      return;
+    } else if (!isAsyncFunction) {
+      functions[key] = target[key];
+      return;
+    }
+
+    if (target[key].constructor.name === 'GeneratorFunction') {
+      functions[key] = co.wrap(target[key]);
+      return;
+    }
+    functions[key] = co.wrap(target[key]);
+  })
+  return functions;
 }
 
 function _actualMethodKeys(target) {
@@ -98,5 +133,7 @@ function _actualMethodKeys(target) {
 module.exports = {
   wrap,
   wrapStaticMethods,
-  wrapInstanceMethods
+  wrapInstanceMethods,
+  getStaticMethods,
+  getInstanceMethods
 };

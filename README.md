@@ -1,15 +1,17 @@
-# async-class
+# async-class-co
+
+This is a Fork of async-class (https://github.com/danielstjules/async-class) that is implemented with Generators and Co (https://github.com/tj/co).
 
 Cleaner ES6 async class methods for Node 4.0.0+. A solution to using promises
 and coroutines with classes without the overhead of babel, or the need to adopt
 unimplemented syntax and features, until v8/node supports ES7 async/await.
 
-[![Build Status](https://travis-ci.org/danielstjules/async-class.svg?branch=master)](https://travis-ci.org/danielstjules/async-class)
+[![Build Status](https://travis-ci.org/viniciusps2/async-class-co.svg?branch=master)](https://travis-ci.org/viniciusps2/async-class-co)
 
 ## Installation
 
 ```
-npm install --save async-class
+npm install --save async-class-co
 ```
 
 ## Overview
@@ -53,7 +55,7 @@ That's where this library comes in. Using it is simple:
 
 ``` javascript
 'use strict';
-let wrap = require('async-class').wrap;
+let wrap = require('async-class-co').wrap;
 
 class FakeDataStore {
   constructor() {
@@ -73,7 +75,7 @@ Clean ES6 classes and async methods!
 
 ## API
 
-#### async-class.wrap(klass [, methodNames])
+#### async-class-co.wrap(klass [, methodNames])
 
 Wraps static and instance methods whose name ends with Async, or are
 GeneratorFunctions. Any GeneratorFunction is wrapped with
@@ -81,7 +83,7 @@ bluebird.coroutine(), and others with bluebird.method(). Accepts an optional
 array of method names, wrapping only those found in the array, and disabling
 the Async suffix check. Returns the class.
 
-#### async-class.wrapStaticMethods(klass [, methodNames])
+#### async-class-co.wrapStaticMethods(klass [, methodNames])
 
 Wraps static methods whose name ends with Async or are GeneratorFunctions.
 Any GeneratorFunction is wrapped with bluebird.coroutine(), and others with
@@ -89,7 +91,7 @@ bluebird.method(). Accepts an optional array of method names, wrapping only
 those found in the array, and disabling the Async suffix check. Returns the
 class.
 
-#### async-class.wrapInstanceMethods(klass [, methodNames])
+#### async-class-co.wrapInstanceMethods(klass [, methodNames])
 
 Wraps instance methods whose name ends with Async, or are GeneratorFunctions.
 Any GeneratorFunction is wrapped with bluebird.coroutine(), and others with
