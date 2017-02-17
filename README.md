@@ -31,19 +31,19 @@ class FakeDataStore {
 }
 ```
 
-You'd use libraries that offer coroutine functionality like `co` or `bluebird`.
+You'd use libraries that offer coroutine functionality like `co`.
 However, there's no way to decorate those methods with ES6. Without the ES6
 class sugar, we'd like to achieve the following:
 
 ``` javascript
 'use strict';
-let Promise = require('bluebird');
+let wrap = require('co').wrap;
 
 function FakeDataStore {
   this.store = new Map();
 }
 
-FakeDataStore.prototype.setAsync = Promise.coroutine(function*(key, value) {
+FakeDataStore.prototype.setAsync = wrap(function*(key, value) {
   this.store.set(key, value);
   return yield Promise.resolve(key);
 };
@@ -77,22 +77,19 @@ Clean ES6 classes and async methods!
 
 Wraps static and instance methods whose name ends with Async, or are
 GeneratorFunctions. Any GeneratorFunction is wrapped with
-bluebird.coroutine(), and others with bluebird.method(). Accepts an optional
-array of method names, wrapping only those found in the array, and disabling
-the Async suffix check. Returns the class.
+co.wrap(). Accepts an optional array of method names, wrapping only those 
+found in the array, and disabling the Async suffix check. Returns the class.
 
 #### async-class-co.wrapStaticMethods(klass [, methodNames])
 
 Wraps static methods whose name ends with Async or are GeneratorFunctions.
-Any GeneratorFunction is wrapped with bluebird.coroutine(), and others with
-bluebird.method(). Accepts an optional array of method names, wrapping only
-those found in the array, and disabling the Async suffix check. Returns the
-class.
+Any GeneratorFunction is wrapped with co.wrap(). Accepts an optional array 
+of method names, wrapping only those found in the array, and disabling the
+Async suffix check. Returns the class.
 
 #### async-class-co.wrapInstanceMethods(klass [, methodNames])
 
 Wraps instance methods whose name ends with Async, or are GeneratorFunctions.
-Any GeneratorFunction is wrapped with bluebird.coroutine(), and others with
-bluebird.method(). Accepts an optional array of method names, wrapping only
-those found in the array, and disabling the Async suffix check. Returns the
-class.
+Any GeneratorFunction is wrapped with co.wrap(). Accepts an optional array of
+method names, wrapping only those found in the array, and disabling the Async
+suffix check. Returns the class.
