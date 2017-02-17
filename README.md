@@ -4,7 +4,11 @@ Clean ES6 async class wrapper in Node 4.0.0+. A solution to use promises and cor
 
 This package is a fork from the project [async-class](https://github.com/danielstjules/async-class). But implemented with Generators and [Co](https://github.com/tj/co) instead of Bluebird (present in the original async-class project).
 
-[![Build Status](https://travis-ci.org/viniciusps2/async-class-co.svg?branch=master)](https://travis-ci.org/viniciusps2/async-class-co)
+[![NPM version][npm-image]][npm-url] 
+[![Build Status][travis-image]][travis-url] 
+[![Dependency Status][daviddm-image]][daviddm-url] 
+[![Coverage percentage][coveralls-image]][coveralls-url]
+[![Standard - JavaScript Style Guide][standard-image]][standard-url]
 
 ## Installation
 
@@ -93,3 +97,14 @@ Wraps instance methods whose name ends with Async, or are GeneratorFunctions.
 Any GeneratorFunction is wrapped with co.wrap(). Accepts an optional array of
 method names, wrapping only those found in the array, and disabling the Async
 suffix check. Returns the class.
+
+[npm-image]: https://badge.fury.io/js/async-class-co.svg
+[npm-url]: https://www.npmjs.com/package/async-class-co
+[travis-image]: https://travis-ci.org/viniciusps2/async-class-co.svg?branch=master
+[travis-url]: https://travis-ci.org/viniciusps2/async-class-co
+[daviddm-image]: https://david-dm.org/viniciusps2/async-class-co.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/viniciusps2/async-class-co
+[coveralls-image]: https://coveralls.io/repos/viniciusps2/async-class-co/badge.svg
+[coveralls-url]: https://coveralls.io/r/viniciusps2/async-class-co
+[standard-image]: https://cdn.rawgit.com/feross/standard/master/badge.svg
+[standard-url]: https://github.com/feross/standard
