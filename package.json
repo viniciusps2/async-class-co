@@ -1,6 +1,6 @@
 {
   "name": "async-class-co",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Cleaner ES6 async class methods using Generators + Co",
   "main": "index.js",
   "scripts": {
